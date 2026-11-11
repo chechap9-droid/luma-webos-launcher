@@ -8,7 +8,7 @@ pub const CATEGORIES: [&str; 4] = ["Streaming", "Music", "Gaming", "Utilities"];
 // Only enable after verifying actual video compositing on the target TV.
 // A running GStreamer process alone does not prove a working video wallpaper.
 pub const VIDEO_WALLPAPER_SUPPORTED: bool = true;
-pub const BACKGROUNDS: [(&str, &str); 9] = [
+pub const BACKGROUNDS: [(&str, &str); 39] = [
     ("slate", "Slate"),
     ("midnight", "Midnight"),
     ("prism", "Prism"),
@@ -18,6 +18,36 @@ pub const BACKGROUNDS: [(&str, &str); 9] = [
     ("forest", "Forest"),
     ("yosemite", "Yosemite"),
     ("northern-lights", "Northern lights"),
+    ("anime-01", "Anime 01"),
+    ("anime-02", "Anime 02"),
+    ("anime-03", "Anime 03"),
+    ("anime-04", "Anime 04"),
+    ("anime-05", "Anime 05"),
+    ("anime-06", "Anime 06"),
+    ("anime-07", "Anime 07"),
+    ("anime-08", "Anime 08"),
+    ("anime-09", "Anime 09"),
+    ("anime-10", "Anime 10"),
+    ("anime-11", "Anime 11"),
+    ("anime-12", "Anime 12"),
+    ("anime-13", "Anime 13"),
+    ("anime-14", "Anime 14"),
+    ("anime-15", "Anime 15"),
+    ("anime-16", "Anime 16"),
+    ("anime-17", "Anime 17"),
+    ("anime-18", "Anime 18"),
+    ("anime-19", "Anime 19"),
+    ("anime-20", "Anime 20"),
+    ("anime-21", "Anime 21"),
+    ("anime-22", "Anime 22"),
+    ("anime-23", "Anime 23"),
+    ("anime-24", "Anime 24"),
+    ("anime-25", "Anime 25"),
+    ("anime-26", "Anime 26"),
+    ("anime-27", "Anime 27"),
+    ("anime-28", "Anime 28"),
+    ("anime-29", "Anime 29"),
+    ("anime-30", "Anime 30"),
 ];
 
 // Generic fallbacks use delimited words, so "game" does not match "endgame".
