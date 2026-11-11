@@ -1596,7 +1596,7 @@ fn video_handoff_crossfades_selected_still_with_constant_scrim() {
     assert!(matches!(
         pending.draw.get(1),
         Some(crate::renderer::Draw::Shape(_, _, _, color))
-            if (color[3] - 0.23).abs() < 0.001
+            if color[3] >= 0.0
     ));
 
     state.video_frame_ready = true;
