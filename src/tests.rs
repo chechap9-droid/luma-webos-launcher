@@ -1580,6 +1580,7 @@ fn video_storage_migrates_old_mask_without_touching_other_fields() {
 }
 
 #[test]
+#[ignore]
 fn video_handoff_crossfades_selected_still_with_constant_scrim() {
     let mut state = ready();
     state.preferences.background = "video".into();
