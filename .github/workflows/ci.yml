@@ -39,21 +39,25 @@ jobs:
         with:
           key: webos-${{ hashFiles('tools/build-webos.sh', 'tools/setup-webos-sdk.mjs', 'tools/webos-runtime.mjs') }}
       - name: Install desktop and asset dependencies
-        timeout-minutes: 15
+        timeout-minutes: 10
         env:
           DEBIAN_FRONTEND: noninteractive
+          NEEDRESTART_MODE: a
         run: |
-          apt_options=(-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 -o Dpkg::Lock::Timeout=60)
-          for attempt in 1 2 3; do
-            if sudo timeout 300 apt-get "${apt_options[@]}" update && \
-               sudo timeout 600 apt-get "${apt_options[@]}" install -y --no-install-recommends \
-                 libsdl2-dev pkg-config woff2 python3-fonttools libgl1-mesa-dri xvfb xauth; then
-              exit 0
-            fi
-            echo "apt attempt $attempt failed; retrying" >&2
-            sleep 10
-          done
-          exit 1
+          # 1. Cambiar a los mirrors principales oficiales de Ubuntu (evita cuelgues del mirror de Azure)
+          sudo sed -i 's|azure.archive.ubuntu.com|archive.ubuntu.com|g' /etc/apt/sources.list || true
+
+          # 2. Matar cualquier proceso previo que tenga bloqueado apt
+          sudo killall apt apt-get dpkg 2>/dev/null || true
+          sudo rm -f /var/lib/apt/lists/lock /var/cache/apt/archives/lock /var/lib/dpkg/lock* || true
+          sudo dpkg --configure -a || true
+
+          # 3. Update rápido con timeout corto de 60 segundos
+          sudo timeout 60 apt-get update -o Acquire::Retries=3 -o Acquire::http::Timeout=15
+
+          # 4. Instalación directa mostrando progreso
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libsdl2-dev pkg-config woff2 python3-fonttools libgl1-mesa-dri xvfb xauth
       - name: Check formatting
         run: pnpm format:check
       - name: Lint Rust and packaging tools
