@@ -665,7 +665,7 @@ pub fn scene_with_pill(
         out.shape(
             Rect::new(0., 0., 1920., 1080.),
             0.,
-            c(0x04090f, 0.23 * (1. - clear)),
+            c(0x04090f, 0. * (1. - clear)),
         );
     } else if let Some((previous, start)) = &state.previous_background {
         out.image(
@@ -714,7 +714,7 @@ pub fn scene_with_pill(
             Rect::new(0., 300., 1920., 780.),
             0.,
             c(0x000000, 0.),
-            c(0x000000, 0.6 * (1. - clear)),
+            c(0x000000, 0.15 * (1. - clear)),
         ));
     }
     let main_bottom = state.main_bottom();
